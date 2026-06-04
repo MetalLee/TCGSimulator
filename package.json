@@ -1,0 +1,8 @@
+{
+  "name": "tcg-simulator-mvp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve:web": "node tools/serve-web.mjs"
+  }
+}

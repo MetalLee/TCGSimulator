@@ -1,0 +1,738 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/Main.gd" id="1_main"]
+[ext_resource type="Theme" path="res://theme/main_theme.tres" id="2_theme"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_main")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.045, 0.052, 0.065, 1)
+
+[node name="RootMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layout" type="HBoxContainer" parent="RootMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="NavigationPanel" type="PanelContainer" parent="RootMargin/Layout"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+
+[node name="NavigationMargin" type="MarginContainer" parent="RootMargin/Layout/NavigationPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Navigation" type="VBoxContainer" parent="RootMargin/Layout/NavigationPanel/NavigationMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "TCG 摆摊"
+
+[node name="SubtitleLabel" type="Label" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "挂机收集 MVP"
+
+[node name="Spacer" type="Control" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="DashboardButton" type="Button" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+layout_mode = 2
+text = "仪表盘"
+
+[node name="PacksButton" type="Button" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+layout_mode = 2
+text = "卡包"
+
+[node name="CollectionButton" type="Button" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+layout_mode = 2
+text = "图鉴"
+
+[node name="InventoryButton" type="Button" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+layout_mode = 2
+text = "库存"
+
+[node name="StallButton" type="Button" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+layout_mode = 2
+text = "我的摊位"
+
+[node name="MarketButton" type="Button" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+layout_mode = 2
+text = "市场"
+
+[node name="DebugButton" type="Button" parent="RootMargin/Layout/NavigationPanel/NavigationMargin/Navigation"]
+layout_mode = 2
+text = "Debug"
+
+[node name="PagePanel" type="PanelContainer" parent="RootMargin/Layout"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PageMargin" type="MarginContainer" parent="RootMargin/Layout/PagePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="PageStack" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="DashboardPanel" type="PanelContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "仪表盘"
+
+[node name="Body" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 3
+text = "这里会显示金币、挂机奖励、图鉴进度和近期摊位收入。"
+
+[node name="DashboardStats" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "当前金币：0\n图鉴完成度：0.0%"
+
+[node name="IdleTime" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "可领取挂机时间：00:00:00"
+
+[node name="IdleRewards" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "可领取奖励：卡包 0，金币 +0"
+
+[node name="ClaimIdleButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+text = "领取挂机奖励"
+
+[node name="ClaimIdleStatus" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "挂机奖励待命。"
+
+[node name="AchievementTitle" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "新手目标"
+
+[node name="AchievementNextHint" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16
+text = "下一步：领取挂机奖励。"
+
+[node name="AchievementScroll" type="ScrollContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AchievementList" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DashboardPanel/Margin/Content/AchievementScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="PacksPanel" type="PanelContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/PacksPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/PacksPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/PacksPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "卡包"
+
+[node name="Body" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/PacksPanel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 3
+text = "这里会显示卡包库存、购买按钮和开包结果。"
+
+[node name="PackWallet" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/PacksPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "当前金币：0"
+
+[node name="PackList" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/PacksPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PackStatus" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/PacksPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "选择卡包进行购买或打开。"
+
+[node name="OpenResultsTitle" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/PacksPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "最近开包结果"
+
+[node name="OpenResults" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/PacksPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CollectionPanel" type="PanelContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/CollectionPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/CollectionPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/CollectionPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "图鉴"
+
+[node name="CollectionSummary" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/CollectionPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 3
+text = "图鉴完成度：0.0%  已收集：0/0"
+
+[node name="CollectionFilters" type="HBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/CollectionPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CollectionFilterLabel" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/CollectionPanel/Margin/Content/CollectionFilters"]
+layout_mode = 2
+text = "筛选"
+
+[node name="CollectionFilter" type="OptionButton" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/CollectionPanel/Margin/Content/CollectionFilters"]
+custom_minimum_size = Vector2(180, 34)
+layout_mode = 2
+
+[node name="CollectionScroll" type="ScrollContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/CollectionPanel/Margin/Content"]
+custom_minimum_size = Vector2(0, 420)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="CollectionList" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/CollectionPanel/Margin/Content/CollectionScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="InventoryPanel" type="PanelContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "库存"
+
+[node name="Body" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 3
+text = "这里会显示玩家拥有的卡牌数量，并标出可上架的重复卡。"
+
+[node name="InventorySummary" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "拥有卡牌种类：0  总张数：0"
+
+[node name="InventoryControls" type="HBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="InventorySortLabel" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content/InventoryControls"]
+layout_mode = 2
+text = "排序"
+
+[node name="InventorySort" type="OptionButton" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content/InventoryControls"]
+custom_minimum_size = Vector2(180, 34)
+layout_mode = 2
+
+[node name="InventoryListTitle" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "已拥有卡牌 / 可上架库存"
+
+[node name="InventoryScroll" type="ScrollContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="InventoryList" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content/InventoryScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="InventoryStatus" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/InventoryPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "选择库存卡牌上架到摊位。"
+
+[node name="StallPanel" type="PanelContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "我的摊位"
+
+[node name="Body" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 3
+text = "这里会显示上架卡牌、标价和模拟访客购买记录。"
+
+[node name="StallSummary" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "上架格子：0/6  空余：6  当前上架总价值：0 金币"
+
+[node name="SimulateVisitorsButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+custom_minimum_size = Vector2(140, 36)
+layout_mode = 2
+text = "模拟访客"
+
+[node name="StallListingsTitle" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "当前上架列表"
+
+[node name="StallListings" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="StallInventoryTitle" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "从库存上架"
+
+[node name="StallInventoryScroll" type="ScrollContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StallInventoryList" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content/StallInventoryScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="TransactionsTitle" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "最近交易记录"
+
+[node name="StallTransactions" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="StallStatus" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/StallPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "摊位系统待命。"
+
+[node name="MarketPanel" type="PanelContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "市场"
+
+[node name="Body" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 3
+text = "这里会显示模拟玩家摊位，并允许玩家购买缺失卡牌。"
+
+[node name="MarketSummary" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "当前金币：0  模拟上架：0"
+
+[node name="MarketFiltersTop" type="HBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SearchInput" type="LineEdit" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content/MarketFiltersTop"]
+custom_minimum_size = Vector2(220, 34)
+layout_mode = 2
+placeholder_text = "按卡名搜索"
+
+[node name="UncollectedOnly" type="CheckBox" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content/MarketFiltersTop"]
+layout_mode = 2
+text = "只显示未收集"
+
+[node name="RefreshMarketButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content/MarketFiltersTop"]
+custom_minimum_size = Vector2(120, 34)
+layout_mode = 2
+text = "刷新模拟市场"
+
+[node name="MarketFiltersBottom" type="HBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SeriesFilter" type="OptionButton" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content/MarketFiltersBottom"]
+custom_minimum_size = Vector2(140, 34)
+layout_mode = 2
+
+[node name="RarityFilter" type="OptionButton" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content/MarketFiltersBottom"]
+custom_minimum_size = Vector2(120, 34)
+layout_mode = 2
+
+[node name="MaxPriceLabel" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content/MarketFiltersBottom"]
+layout_mode = 2
+text = "最高价格"
+
+[node name="MaxPriceSpin" type="SpinBox" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content/MarketFiltersBottom"]
+custom_minimum_size = Vector2(110, 34)
+layout_mode = 2
+max_value = 9999.0
+step = 1.0
+
+[node name="SortOption" type="OptionButton" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content/MarketFiltersBottom"]
+custom_minimum_size = Vector2(140, 34)
+layout_mode = 2
+
+[node name="MarketStatus" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "浏览模拟市场，购买缺失卡牌。"
+
+[node name="MarketScroll" type="ScrollContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content"]
+custom_minimum_size = Vector2(0, 260)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarketListings" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/MarketPanel/Margin/Content/MarketScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="DebugPanel" type="PanelContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Debug"
+
+[node name="Body" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 3
+text = "这里会放置重置存档、测试奖励和本地状态检查按钮。"
+
+[node name="DebugStats" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "卡牌总数：0\n卡包总数：0"
+
+[node name="DebugState" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "金币：0"
+
+[node name="ResourceActions" type="HBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Add100CoinsButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/ResourceActions"]
+layout_mode = 2
+text = "增加 100 金币"
+
+[node name="Add1000CoinsButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/ResourceActions"]
+layout_mode = 2
+text = "增加 1000 金币"
+
+[node name="Add1PackButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/ResourceActions"]
+layout_mode = 2
+text = "增加 1 个 basic_pack"
+
+[node name="Add5PacksButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/ResourceActions"]
+layout_mode = 2
+text = "增加 5 个 basic_pack"
+
+[node name="TimeActions" type="HBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FastForward1HourButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/TimeActions"]
+layout_mode = 2
+text = "快进 1 小时"
+
+[node name="FastForward8HoursButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/TimeActions"]
+layout_mode = 2
+text = "快进 8 小时"
+
+[node name="RandomDuplicateCardButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/TimeActions"]
+layout_mode = 2
+text = "生成随机重复卡"
+
+[node name="Actions" type="HBoxContainer" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SaveButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/Actions"]
+layout_mode = 2
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/Actions"]
+layout_mode = 2
+text = "Load"
+
+[node name="ResetButton" type="Button" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content/Actions"]
+layout_mode = 2
+text = "Reset"
+
+[node name="DebugStatus" type="Label" parent="RootMargin/Layout/PagePanel/PageMargin/PageStack/DebugPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "存档系统待命。"
+
+[node name="FooterLabel" type="Label" parent="."]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -40.0
+offset_right = -16.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 13
+text = "MVP Prototype - Local simulated economy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TutorialOverlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.015, 0.018, 0.024, 0.88)
+
+[node name="Center" type="CenterContainer" parent="TutorialOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TutorialPanel" type="PanelContainer" parent="TutorialOverlay/Center"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="TutorialOverlay/Center/TutorialPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="Content" type="VBoxContainer" parent="TutorialOverlay/Center/TutorialPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="TutorialTitle" type="Label" parent="TutorialOverlay/Center/TutorialPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "新手引导"
+
+[node name="TutorialStepLabel" type="Label" parent="TutorialOverlay/Center/TutorialPanel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 20
+text = "欢迎！你经营着一个小小的线上卡牌摊位。"
+
+[node name="TutorialProgressLabel" type="Label" parent="TutorialOverlay/Center/TutorialPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "1 / 6"
+
+[node name="TutorialNextButton" type="Button" parent="TutorialOverlay/Center/TutorialPanel/Margin/Content"]
+custom_minimum_size = Vector2(140, 38)
+layout_mode = 2
+text = "下一步"
+
+[node name="LoadingOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.035, 0.043, 0.055, 1)
+
+[node name="Center" type="CenterContainer" parent="LoadingOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadingPanel" type="PanelContainer" parent="LoadingOverlay/Center"]
+custom_minimum_size = Vector2(460, 0)
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="LoadingOverlay/Center/LoadingPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 26
+
+[node name="Content" type="VBoxContainer" parent="LoadingOverlay/Center/LoadingPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LoadingTitle" type="Label" parent="LoadingOverlay/Center/LoadingPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "TCG 摆摊"
+horizontal_alignment = 1
+
+[node name="LoadingStatus" type="Label" parent="LoadingOverlay/Center/LoadingPanel/Margin/Content"]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 16
+text = "正在准备本地模拟经济..."
+horizontal_alignment = 1
+
+[node name="LoadingFooter" type="Label" parent="LoadingOverlay/Center/LoadingPanel/Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "MVP Prototype - Local simulated economy"
+horizontal_alignment = 1

@@ -1,0 +1,50 @@
+[
+	{
+		"id": "basic_pack",
+		"name": "基础补给包",
+		"price": 60,
+		"cards_per_pack": 5,
+		"allowed_series": [
+			"基础系列"
+		],
+		"rarity_rates": {
+			"N": 70.0,
+			"R": 22.0,
+			"SR": 6.0,
+			"SSR": 1.8,
+			"UR": 0.2
+		}
+	},
+	{
+		"id": "forest_pack",
+		"name": "森林秘藏包",
+		"price": 90,
+		"cards_per_pack": 5,
+		"allowed_series": [
+			"森林系列"
+		],
+		"rarity_rates": {
+			"N": 65.0,
+			"R": 24.0,
+			"SR": 8.0,
+			"SSR": 2.5,
+			"UR": 0.5
+		}
+	},
+	{
+		"id": "machine_pack",
+		"name": "机械工坊包",
+		"price": 120,
+		"cards_per_pack": 5,
+		"allowed_series": [
+			"机械系列"
+		],
+		"rarity_rates": {
+			"N": 60.0,
+			"R": 25.0,
+			"SR": 10.0,
+			"SSR": 4.0,
+			"UR": 1.0
+		}
+	}
+]

@@ -1,0 +1,29 @@
+# Godot editor cache and imported resource outputs.
+.godot/
+
+# Godot temporary files.
+*.tmp
+*.temp
+
+# Local save/config data should stay outside the repo.
+user://
+
+# Web export output. Keep export presets and source assets in the repo.
+exports/web/*
+!exports/web/.gitkeep
+exports/web2/
+
+# Local static server logs.
+serve-web-*.log
+*.out.log
+*.err.log
+
+# OS/editor noise.
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Dependency folders, in case Node tooling grows later.
+node_modules/
