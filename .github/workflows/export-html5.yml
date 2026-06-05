@@ -1,0 +1,115 @@
+name: Export HTML5
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  GODOT_VERSION: "4.6.3"
+  GODOT_STATUS: stable
+  EXPORT_PRESET: Web
+  EXPORT_DIR: exports/web
+  NODE_VERSION: "22"
+  WEB_PORT: "8787"
+
+jobs:
+  export-html5:
+    name: Export Godot Web build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Download Godot and Web export templates
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          godot_tag="${GODOT_VERSION}-${GODOT_STATUS}"
+          godot_name="Godot_v${GODOT_VERSION}-${GODOT_STATUS}"
+          godot_dir="${RUNNER_TEMP}/godot"
+          templates_dir="${HOME}/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_STATUS}"
+
+          mkdir -p "${godot_dir}" "${templates_dir}"
+
+          curl -L --fail --retry 3 \
+            "https://github.com/godotengine/godot/releases/download/${godot_tag}/${godot_name}_linux.x86_64.zip" \
+            -o "${RUNNER_TEMP}/godot.zip"
+          unzip -q "${RUNNER_TEMP}/godot.zip" -d "${godot_dir}"
+          chmod +x "${godot_dir}/${godot_name}_linux.x86_64"
+
+          curl -L --fail --retry 3 \
+            "https://github.com/godotengine/godot/releases/download/${godot_tag}/${godot_name}_export_templates.tpz" \
+            -o "${RUNNER_TEMP}/godot-templates.tpz"
+          unzip -q "${RUNNER_TEMP}/godot-templates.tpz" -d "${RUNNER_TEMP}/godot-templates"
+          cp -R "${RUNNER_TEMP}/godot-templates/templates/." "${templates_dir}/"
+
+          echo "GODOT_BIN=${godot_dir}/${godot_name}_linux.x86_64" >> "${GITHUB_ENV}"
+
+      - name: Import Godot resources
+        shell: bash
+        run: |
+          set -euo pipefail
+          "${GODOT_BIN}" --headless --editor --quit --path .
+
+      - name: Export HTML5
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf "${EXPORT_DIR}"
+          mkdir -p "${EXPORT_DIR}"
+
+          "${GODOT_BIN}" --headless --path . --export-release "${EXPORT_PRESET}" "${EXPORT_DIR}/index.html"
+
+          test -f "${EXPORT_DIR}/index.html"
+          test -f "${EXPORT_DIR}/index.js"
+          test -f "${EXPORT_DIR}/index.pck"
+          test -f "${EXPORT_DIR}/index.wasm"
+
+      - name: Start Node.js service and smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PORT="${WEB_PORT}" npm run serve:web > serve-web.log 2>&1 &
+          echo "$!" > serve-web.pid
+
+          for attempt in {1..30}; do
+            if curl -fsS "http://127.0.0.1:${WEB_PORT}/" > /tmp/tcg-simulator-index.html; then
+              echo "Node.js service is serving the HTML5 export."
+              exit 0
+            fi
+            sleep 1
+          done
+
+          cat serve-web.log
+          exit 1
+
+      - name: Stop Node.js service
+        if: always()
+        shell: bash
+        run: |
+          if [ -f serve-web.pid ]; then
+            kill "$(cat serve-web.pid)" 2>/dev/null || true
+          fi
+
+      - name: Upload HTML5 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tcg-simulator-html5
+          path: ${{ env.EXPORT_DIR }}
+          if-no-files-found: error
